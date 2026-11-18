@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FibraFix Taller</title>
+<meta name="description" content="Reparación de fibra de vidrio y fascias de plástico. Venta de alerones, fascias y spoilers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e0f12; --bg-2:#16181d; --card:#1c1f26; --line:#2a2e37;
+    --text:#f2f3f5; --muted:#a3a8b4; --accent:#ff5a1f; --accent-2:#ffb21f;
+    --radius:14px; --max:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block;max-width:100%}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+  h1,h2,h3{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.5px;line-height:1.05}
+  h2{font-size:clamp(2rem,4vw,2.8rem);margin-bottom:.4rem}
+  .eyebrow{color:var(--accent);font-weight:600;font-size:.85rem;letter-spacing:2px;text-transform:uppercase}
+  .lead{color:var(--muted);max-width:620px}
+  section{padding:88px 0}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;transition:.2s;border:2px solid transparent;cursor:pointer;font-size:1rem}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:#ff7438;transform:translateY(-2px)}
+  .btn-ghost{border-color:var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(14,15,18,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-family:"Barlow Condensed";font-weight:800;font-size:1.6rem;letter-spacing:1px}
+  .logo span{color:var(--accent)}
+  .nav ul{display:flex;gap:28px;list-style:none}
+  .nav ul a{color:var(--muted);font-weight:500;font-size:.95rem}
+  .nav ul a:hover{color:var(--text)}
+  .menu-btn{display:none;background:none;border:0;color:var(--text);font-size:1.6rem;cursor:pointer}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;padding:96px 0 80px;
+    background:radial-gradient(900px 500px at 85% 20%,rgba(255,90,31,.22),transparent 60%),
+               linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+  .hero h1{font-size:clamp(2.6rem,6.5vw,5rem);margin:12px 0 18px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero .lead{font-size:1.1rem;margin-bottom:30px}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .stats{display:flex;gap:36px;margin-top:44px;flex-wrap:wrap}
+  .stats b{display:block;font-family:"Barlow Condensed";font-size:2.2rem;color:var(--accent-2)}
+  .stats small{color:var(--muted)}
+  .car{width:100%;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+
+  /* Services */
+  .grid{display:grid;gap:22px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:.25s}
+  .card:hover{border-color:var(--accent);transform:translateY(-4px)}
+  .icon{width:52px;height:52px;border-radius:12px;background:rgba(255,90,31,.12);display:grid;place-items:center;margin-bottom:18px;color:var(--accent)}
+  .card h3{font-size:1.5rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.95rem}
+  .sec-head{margin-bottom:44px}
+
+  /* Shop */
+  .shop{background:var(--bg-2)}
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+  .chip{padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font:500 .9rem Inter}
+  .chip.active,.chip:hover{border-color:var(--accent);color:#fff;background:rgba(255,90,31,.15)}
+  .product{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:.25s}
+  .product:hover{border-color:var(--accent)}
+  .thumb{aspect-ratio:4/3;background:linear-gradient(135deg,#232733,#15171c);display:grid;place-items:center;position:relative}
+  .thumb svg{width:78%}
+  .tag{position:absolute;top:12px;left:12px;background:var(--accent);color:#fff;font-size:.72rem;font-weight:600;padding:4px 10px;border-radius:999px;text-transform:uppercase}
+  .p-body{padding:18px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .p-body h3{font-size:1.25rem}
+  .p-body small{color:var(--muted)}
+  .p-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:12px}
+  .price{font-family:"Barlow Condensed";font-size:1.6rem;color:var(--accent-2)}
+  .p-foot a{font-size:.85rem;font-weight:600;color:var(--accent)}
+
+  /* Process */
+  .step{position:relative;padding-top:84px}
+  .step .n{position:absolute;top:16px;left:28px;line-height:1;font-family:"Barlow Condensed";font-size:3.4rem;font-weight:800;color:transparent;-webkit-text-stroke:1.5px var(--accent)}
+
+  /* Before/after */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .ba-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--card)}
+  .ba-img{aspect-ratio:16/9;display:grid;place-items:center;position:relative}
+  .ba-img.before{background:repeating-linear-gradient(45deg,#2a2224,#2a2224 12px,#241e20 12px,#241e20 24px)}
+  .ba-img.after{background:linear-gradient(135deg,#1e2a3a,#0f1520)}
+  .ba-img span{position:absolute;top:12px;left:12px;font-weight:600;font-size:.8rem;padding:4px 12px;border-radius:999px;background:#000a}
+  .ba-card p{padding:16px 18px;color:var(--muted);font-size:.95rem}
+
+  /* Testimonials */
+  .quote p{color:var(--text);font-size:1rem}
+  .quote .who{margin-top:16px;color:var(--muted);font-size:.9rem}
+  .stars{color:var(--accent-2);letter-spacing:2px;margin-bottom:10px}
+
+  /* Contact */
+  .contact{background:linear-gradient(135deg,#1a0f0a,var(--bg-2))}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  form{display:grid;gap:14px}
+  input,select,textarea{width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;color:var(--text);font:400 1rem Inter}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  .info li{list-style:none;display:flex;gap:14px;margin-bottom:18px;color:var(--muted)}
+  .info b{color:var(--text);display:block}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.9rem}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  .wa{position:fixed;right:18px;bottom:18px;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4);z-index:60;transition:.2s}
+  .wa:hover{transform:scale(1.08)}
+
+  @media (max-width:960px){
+    .hero-grid,.contact-grid{grid-template-columns:1fr}
+    .g3,.g4{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:640px){
+    section{padding:64px 0}
+    .nav ul{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg-2);border-bottom:1px solid var(--line)}
+    .nav ul.open{display:flex}
+    .nav ul a{display:block;padding:14px 16px}
+    .menu-btn{display:block}
+    .g3,.g4,.ba{grid-template-columns:1fr}
+    .stats{gap:24px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">FIBRA<span>FIX</span></a>
+    <button class="menu-btn" aria-label="Menú" onclick="document.querySelector('.nav ul').classList.toggle('open')">☰</button>
+    <ul>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#tienda">Tienda</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#trabajos">Trabajos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Taller especializado · Fibra y plástico</div>
+      <h1>Reparamos tu fascia.<br><em>Equipamos tu auto.</em></h1>
+      <p class="lead">Reparación profesional de fibra de vidrio y fascias de plástico, más venta de alerones, fascias y spoilers listos para instalar. Quedan como nuevos, a una fracción del precio de agencia.</p>
+      <div class="hero-ctas">
+        <a href="#contacto" class="btn btn-primary">Cotiza gratis →</a>
+        <a href="#tienda" class="btn btn-ghost">Ver catálogo</a>
+      </div>
+      <div class="stats">
+        <div><b>+1,500</b><small>Piezas reparadas</small></div>
+        <div><b>10 años</b><small>De experiencia</small></div>
+        <div><b>Garantía</b><small>En todos los trabajos</small></div>
+      </div>
+    </div>
+    <svg class="car" viewBox="0 0 600 300" aria-hidden="true">
+      <defs>
+        <linearGradient id="body" x1="0" x2="1"><stop offset="0" stop-color="#ff5a1f"/><stop offset="1" stop-color="#c2360a"/></linearGradient>
+      </defs>
+      <!-- spoiler -->
+      <path d="M40 92 L150 84 L156 96 L52 104 Z" fill="#222"/>
+      <rect x="92" y="96" width="8" height="30" fill="#222"/>
+      <!-- body -->
+      <path d="M30 200 Q30 150 90 140 L200 120 Q260 70 340 72 Q420 74 470 128 L540 145 Q575 152 575 190 L575 210 L30 210 Z" fill="url(#body)"/>
+      <path d="M215 124 Q265 86 335 86 Q400 88 440 126 Z" fill="#1b2230" opacity=".9"/>
+      <line x1="330" y1="86" x2="325" y2="126" stroke="#ff5a1f" stroke-width="5"/>
+      <!-- front fascia -->
+      <path d="M520 175 L578 180 L578 212 L510 212 Z" fill="#191919"/>
+      <rect x="530" y="160" width="36" height="10" rx="4" fill="#ffd27a"/>
+      <!-- wheels -->
+      <circle cx="140" cy="212" r="44" fill="#111"/><circle cx="140" cy="212" r="22" fill="#3a3f4b"/>
+      <circle cx="460" cy="212" r="44" fill="#111"/><circle cx="460" cy="212" r="22" fill="#3a3f4b"/>
+      <ellipse cx="300" cy="262" rx="270" ry="10" fill="#000" opacity=".35"/>
+    </svg>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Lo que hacemos</div>
+      <h2>Servicios</h2>
+      <p class="lead">Desde una grieta pequeña hasta una fascia partida en dos: la reparamos, la pintamos y te la entregamos lista.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <div class="icon"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22 L22 4M8 4h14v14"/></svg></div>
+        <h3>Reparación de fibra de vidrio</h3>
+        <p>Laminado, resanado y reconstrucción de piezas de fibra: cofres, alerones, kits de carrocería y defensas.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13h20M7 7l-4 6 4 6M19 7l4 6-4 6"/></svg></div>
+        <h3>Fascias de plástico</h3>
+        <p>Soldadura de plástico con varilla y grapa de acero. Reparamos grietas, pestañas rotas y soportes.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="10" height="14" rx="2"/><path d="M14 8h6v4l-6 2M9 17v6"/></svg></div>
+        <h3>Pintura y acabado</h3>
+        <p>Igualación de color por computadora, primer, pintura y barniz para un acabado de agencia.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l10-5 10 5-10 5z M3 15l10 5 10-5"/></svg></div>
+        <h3>Venta de autopartes</h3>
+        <p>Alerones, fascias, spoilers, faldones y difusores para los modelos más populares.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13" cy="13" r="9"/><path d="M13 8v5l3 3"/></svg></div>
+        <h3>Instalación</h3>
+        <p>Instalamos las piezas que compras con nosotros, ajustadas y alineadas a tu carrocería.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 3l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V7z"/><path d="M9 13l3 3 5-6"/></svg></div>
+        <h3>Piezas personalizadas</h3>
+        <p>Fabricamos piezas a la medida en fibra de vidrio: tomas de aire, labios y kits únicos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIENDA -->
+<section id="tienda" class="shop">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Catálogo</div>
+      <h2>Tienda de autopartes</h2>
+      <p class="lead">Piezas en fibra de vidrio y plástico ABS. Pregunta por tu modelo y año.</p>
+    </div>
+    <div class="filters">
+      <button class="chip active" data-f="all">Todo</button>
+      <button class="chip" data-f="aleron">Alerones</button>
+      <button class="chip" data-f="fascia">Fascias</button>
+      <button class="chip" data-f="spoiler">Spoilers</button>
+    </div>
+    <div class="grid g4" id="products"></div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Cómo trabajamos</div>
+      <h2>Proceso simple</h2>
+    </div>
+    <div class="grid g4">
+      <div class="card step"><span class="n">01</span><h3>Envía fotos</h3><p>Mándanos fotos del daño por WhatsApp o el formulario.</p></div>
+      <div class="card step"><span class="n">02</span><h3>Cotización</h3><p>Te respondemos con precio y tiempo de entrega el mismo día.</p></div>
+      <div class="card step"><span class="n">03</span><h3>Reparación</h3><p>Soldamos, resanamos y pintamos con materiales de calidad.</p></div>
+      <div class="card step"><span class="n">04</span><h3>Entrega</h3><p>Recoges tu pieza o tu auto, con garantía por escrito.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRABAJOS -->
+<section id="trabajos" class="shop">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Antes y después</div>
+      <h2>Nuestros trabajos</h2>
+      <p class="lead">Aquí irán las fotos reales de tus reparaciones.</p>
+    </div>
+    <div class="ba">
+      <div class="ba-card"><div class="ba-img before"><span>Antes</span><svg width="120" viewBox="0 0 120 60"><path d="M10 50 L40 10 L55 35 L70 15 L110 50" fill="none" stroke="#ff5a1f" stroke-width="3" stroke-dasharray="6 4"/></svg></div><p>Fascia delantera partida en tres piezas.</p></div>
+      <div class="ba-card"><div class="ba-img after"><span>Después</span><svg width="120" viewBox="0 0 120 60"><path d="M10 45 Q60 10 110 45" fill="none" stroke="#4fd1c5" stroke-width="4"/></svg></div><p>Soldada, resanada y pintada en color original.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Opiniones</div>
+      <h2>Lo que dicen nuestros clientes</h2>
+    </div>
+    <div class="grid g3">
+      <div class="card quote"><div class="stars">★★★★★</div><p>“Mi fascia estaba partida y en agencia me pedían cambiarla. Aquí la repararon y no se nota nada.”</p><div class="who">— Cliente, Jetta 2018</div></div>
+      <div class="card quote"><div class="stars">★★★★★</div><p>“Compré un alerón para mi Civic y me lo instalaron el mismo día. Excelente acabado.”</p><div class="who">— Cliente, Civic 2017</div></div>
+      <div class="card quote"><div class="stars">★★★★★</div><p>“Buen precio, rápidos y con garantía. Ya les llevé dos autos.”</p><div class="who">— Cliente, Mazda 3</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow">Contacto</div>
+      <h2>Cotiza tu reparación</h2>
+      <p class="lead" style="margin-bottom:30px">Cuéntanos qué necesitas y te respondemos por WhatsApp con tu cotización.</p>
+      <ul class="info">
+        <li>📍<div><b>Dirección</b>Calle Ejemplo #123, Col. Centro, Tu Ciudad</div></li>
+        <li>📞<div><b>Teléfono / WhatsApp</b>(000) 000 0000</div></li>
+        <li>🕒<div><b>Horario</b>Lun a Vie 9:00–19:00 · Sáb 9:00–14:00</div></li>
+      </ul>
+    </div>
+    <form id="quote">
+      <input name="nombre" placeholder="Tu nombre" required>
+      <input name="auto" placeholder="Marca, modelo y año" required>
+      <select name="servicio">
+        <option>Reparación de fascia de plástico</option>
+        <option>Reparación de fibra de vidrio</option>
+        <option>Comprar alerón</option>
+        <option>Comprar fascia</option>
+        <option>Comprar spoiler</option>
+        <option>Otro</option>
+      </select>
+      <textarea name="mensaje" rows="4" placeholder="Describe el daño o la pieza que buscas"></textarea>
+      <button class="btn btn-primary" type="submit">Enviar por WhatsApp →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="y"></span> FibraFix Taller. Todos los derechos reservados.</span>
+    <span>Reparación de fibra · Fascias · Alerones · Spoilers</span>
+  </div>
+</footer>
+
+<a class="wa" id="wa" href="#" aria-label="WhatsApp" target="_blank" rel="noopener">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.6-.1 1.1z"/></svg>
+</a>
+
+<script>
+  // ⚙️ Cambia aquí tu número de WhatsApp (código de país + número, sin espacios)
+  const WHATSAPP = "520000000000";
+
+  const shapes = {
+    aleron: '<svg viewBox="0 0 200 100"><path d="M15 35 L185 25 L190 42 L22 52 Z" fill="#ff5a1f"/><rect x="50" y="48" width="10" height="35" fill="#555"/><rect x="140" y="42" width="10" height="38" fill="#555"/></svg>',
+    fascia: '<svg viewBox="0 0 200 100"><path d="M10 30 Q100 15 190 30 L185 75 Q100 88 15 75 Z" fill="#3a3f4b"/><rect x="60" y="45" width="80" height="18" rx="6" fill="#111"/><circle cx="35" cy="55" r="8" fill="#ffd27a"/><circle cx="165" cy="55" r="8" fill="#ffd27a"/></svg>',
+    spoiler: '<svg viewBox="0 0 200 100"><path d="M10 60 Q100 30 190 60 L190 70 Q100 48 10 70 Z" fill="#ff5a1f"/><path d="M10 70 Q100 48 190 70" stroke="#111" stroke-width="3" fill="none"/></svg>'
+  };
+  const products = [
+    {t:"aleron", n:"Alerón tipo GT", d:"Fibra de vidrio · Universal", p:2800, tag:"Más vendido"},
+    {t:"aleron", n:"Alerón Civic Type R", d:"Civic 2016–2021", p:3500},
+    {t:"fascia", n:"Fascia delantera Jetta", d:"Plástico ABS · 2015–2018", p:3200},
+    {t:"fascia", n:"Fascia trasera Sentra", d:"Plástico ABS · 2013–2019", p:2900},
+    {t:"spoiler", n:"Spoiler de cajuela", d:"Tipo ducktail · Universal", p:1400, tag:"Nuevo"},
+    {t:"spoiler", n:"Labio delantero", d:"Fibra de vidrio · 3 piezas", p:1800},
+    {t:"aleron", n:"Alerón Mustang", d:"Mustang 2015–2023", p:4200},
+    {t:"fascia", n:"Fascia Mazda 3", d:"Plástico ABS · 2014–2018", p:3400},
+  ];
+  const fmt = n => n.toLocaleString("es-MX",{style:"currency",currency:"MXN",maximumFractionDigits:0});
+  const grid = document.getElementById("products");
+  const waLink = msg => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+
+  function render(f){
+    grid.innerHTML = products.filter(p => f==="all" || p.t===f).map(p => `
+      <article class="product">
+        <div class="thumb">${p.tag?`<span class="tag">${p.tag}</span>`:""}${shapes[p.t]}</div>
+        <div class="p-body">
+          <h3>${p.n}</h3><small>${p.d}</small>
+          <div class="p-foot"><span class="price">${fmt(p.p)}</span>
+          <a href="${waLink('Hola, me interesa: '+p.n)}" target="_blank" rel="noopener">Pedir →</a></div>
+        </div>
+      </article>`).join("");
+  }
+  render("all");
+  document.querySelectorAll(".chip").forEach(c => c.onclick = () => {
+    document.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
+    c.classList.add("active"); render(c.dataset.f);
+  });
+
+  document.getElementById("wa").href = waLink("Hola, quiero una cotización");
+  document.getElementById("y").textContent = new Date().getFullYear();
+  document.querySelectorAll(".nav ul a").forEach(a => a.onclick = () => document.querySelector(".nav ul").classList.remove("open"));
+
+  document.getElementById("quote").onsubmit = e => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(e.target));
+    const msg = `Hola, soy ${d.nombre}.\nAuto: ${d.auto}\nServicio: ${d.servicio}\n${d.mensaje}`;
+    window.open(waLink(msg), "_blank");
+  };
+</script>
+</body>
+</html>
